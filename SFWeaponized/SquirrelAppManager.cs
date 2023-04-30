@@ -64,11 +64,7 @@ namespace SFWeaponized
         private string GetIconPath(string fullPath)
         {
             string[] files = Directory.GetFiles(fullPath, "*.ico", SearchOption.AllDirectories);
-
-            if (files.Length != 0)
-                return files.First();
-
-            return string.Empty;
+            return files.FirstOrDefault();
         }
 
         private string GetVersion(string fullPath)
