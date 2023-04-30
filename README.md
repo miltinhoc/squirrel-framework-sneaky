@@ -19,7 +19,7 @@ This results in the following execution flow:
 2. `Payload.exe` is executed with elevated privileges by `Update.exe`.
 3. `Payload.exe` then calls `Discord.exe`.
 
-### Result
+## Result
 <p align="center">
   <img src="https://user-images.githubusercontent.com/26238419/235329222-8341f37c-41e7-44fc-b5fb-5ce14667d65e.png">
   <br />
