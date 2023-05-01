@@ -50,6 +50,11 @@ namespace SFWeaponized
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <param name="version"></param>
         private void CopyPayloadToDestiny(string fullPath, string version)
         {
             if (string.IsNullOrEmpty(version))
@@ -61,6 +66,11 @@ namespace SFWeaponized
                 File.Copy(PayloadPath, Path.Combine(appDirectory, Path.GetFileName(PayloadPath)), true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <returns></returns>
         private string GetIconPath(string fullPath)
         {
             string[] files = Directory.GetFiles(fullPath, "*.ico", SearchOption.AllDirectories);

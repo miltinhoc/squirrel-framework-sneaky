@@ -25,17 +25,17 @@ namespace SFWeaponized.Model
             if (!File.Exists(updateFilePath))
                 return;
 
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = updateFilePath,
-                Arguments = $"--processStart {payloadExeName} --process-start-args {Name}.exe",
-                UseShellExecute = true,
-                Verb = "runas",
-                CreateNoWindow = true,
-                WindowStyle = ProcessWindowStyle.Hidden
-            };
+            ProcessUtils.Run(updateFilePath, $"--processStart {payloadExeName} --process-start-args {Name}.exe");
+        }
 
-            Process.Start(startInfo);
+        public void CreateShortcut()
+        {
+            string updateFilePath = Path.Combine(Root, "Update.exe");
+
+            if (!File.Exists(updateFilePath))
+                return;
+
+            ProcessUtils.Run(updateFilePath, $"--createShortcut={Name}.exe", false);
         }
     }
 }

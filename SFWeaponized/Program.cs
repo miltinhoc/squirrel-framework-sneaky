@@ -14,10 +14,7 @@ namespace SFWeaponized
 
             foreach (var app in SquirrelAppManager.AppList)
             {
-                if (app.Name == "Postman")
-                {
-                    app.Invoke("Payload.exe");
-                }
+                app.CreateShortcut();
             }
         }
     }
