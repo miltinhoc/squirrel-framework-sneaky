@@ -10,12 +10,19 @@ namespace SFWeaponized.Model
         public string IconPath { get; set; }
         public string CurrentVersion { get; set; }
 
+        public string ShortcutPath { get; set; }
+
         public SquirrelApp(string name, string root, string iconPath, string currentVersion) 
         { 
             Name = name;
             Root = root;
             IconPath = iconPath;
             CurrentVersion = currentVersion;
+        }
+
+        public void SetShortcut()
+        {
+            ShortcutPath = ShortcutUtils.FindShortcut(Root);
         }
 
         public void Invoke(string payloadExeName)

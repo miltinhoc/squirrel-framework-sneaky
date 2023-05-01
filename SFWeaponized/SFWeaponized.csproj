@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{53F3C8BE-7270-4053-B543-203A420A0503}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>SFWeaponized</RootNamespace>
     <AssemblyName>SFWeaponized</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>

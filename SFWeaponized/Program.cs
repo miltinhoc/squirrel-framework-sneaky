@@ -4,7 +4,7 @@ namespace SFWeaponized
 {
     internal class Program
     {
-        public static readonly string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        
         public static SquirrelAppManager SquirrelAppManager;
 
         static void Main(string[] args)
@@ -15,7 +15,12 @@ namespace SFWeaponized
             foreach (var app in SquirrelAppManager.AppList)
             {
                 app.CreateShortcut();
+                app.SetShortcut();
+
+                Console.WriteLine(app.ShortcutPath);
             }
+
+            Console.Read();
         }
     }
 }

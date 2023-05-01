@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace SFWeaponized
 {
@@ -11,7 +12,6 @@ namespace SFWeaponized
                 FileName = path,
                 Arguments = arguments,
                 UseShellExecute = true,
-                //Verb = "runas",
                 CreateNoWindow = true,
                 WindowStyle = ProcessWindowStyle.Hidden
             };
@@ -21,7 +21,7 @@ namespace SFWeaponized
 
             try
             {
-                Process.Start(startInfo);
+                Process.Start(startInfo).WaitForExit();
             }
             catch { }
         }
