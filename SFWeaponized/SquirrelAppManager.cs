@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace SFWeaponized
@@ -42,7 +41,7 @@ namespace SFWeaponized
 
                 if (Directory.Exists(fullPath))
                 {
-                    SquirrelApp tempApp = new SquirrelApp(directory, fullPath, GetIconPath(fullPath), GetVersion(fullPath));
+                    SquirrelApp tempApp = new SquirrelApp(directory, fullPath, GetVersion(fullPath));
                     AppList.Add(tempApp);
 
                     CopyPayloadToDestiny(fullPath, tempApp.CurrentVersion);
@@ -50,11 +49,6 @@ namespace SFWeaponized
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fullPath"></param>
-        /// <param name="version"></param>
         private void CopyPayloadToDestiny(string fullPath, string version)
         {
             if (string.IsNullOrEmpty(version))
@@ -64,17 +58,6 @@ namespace SFWeaponized
 
             if (Directory.Exists(appDirectory))
                 File.Copy(PayloadPath, Path.Combine(appDirectory, Path.GetFileName(PayloadPath)), true);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fullPath"></param>
-        /// <returns></returns>
-        private string GetIconPath(string fullPath)
-        {
-            string[] files = Directory.GetFiles(fullPath, "*.ico", SearchOption.AllDirectories);
-            return files.FirstOrDefault();
         }
 
         private string GetVersion(string fullPath)

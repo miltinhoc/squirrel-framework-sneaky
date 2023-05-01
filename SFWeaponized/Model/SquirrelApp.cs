@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 
 namespace SFWeaponized.Model
 {
@@ -7,23 +6,17 @@ namespace SFWeaponized.Model
     {
         public string Name { get; set; }
         public string Root { get; set; }
-        public string IconPath { get; set; }
         public string CurrentVersion { get; set; }
-
         public string ShortcutPath { get; set; }
 
-        public SquirrelApp(string name, string root, string iconPath, string currentVersion) 
+        public SquirrelApp(string name, string root, string currentVersion) 
         { 
             Name = name;
             Root = root;
-            IconPath = iconPath;
             CurrentVersion = currentVersion;
         }
 
-        public void SetShortcutPath()
-        {
-            ShortcutPath = ShortcutUtils.FindShortcut(Root);
-        }
+        public void SetShortcutPath() => ShortcutPath = ShortcutUtils.FindShortcut(Root);
 
         public void Invoke(string payloadExeName)
         {

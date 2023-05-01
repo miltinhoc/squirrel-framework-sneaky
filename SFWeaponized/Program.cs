@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SFWeaponized
+﻿namespace SFWeaponized
 {
     internal class Program
     {

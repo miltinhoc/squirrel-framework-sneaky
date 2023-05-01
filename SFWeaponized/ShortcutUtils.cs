@@ -8,20 +8,6 @@ namespace SFWeaponized
     {
         public static readonly string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-        public static void Create(string path, string targetPath, string arguments = "", string iconPath = "")
-        {
-            var shortcut = new IWshShell_Class().CreateShortcut(path) as IWshShortcut;
-
-            if (!string.IsNullOrEmpty(arguments))
-                shortcut.Arguments = arguments;
-
-            if (!string.IsNullOrEmpty(iconPath))
-                shortcut.IconLocation = iconPath;
-
-            shortcut.TargetPath = targetPath;
-            shortcut.Save();
-        }
-
         public static void SetRunAsAdmin(string path)
         {
             byte[] data = System.IO.File.ReadAllBytes(path);
