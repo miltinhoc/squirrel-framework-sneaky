@@ -45,10 +45,11 @@ namespace SFWeaponized
             return string.Empty;
         }
 
-        public static void Edit(string path, string arguments)
+        public static void Edit(string path, string arguments, string targetPath)
         {
             var shortcut = new IWshShell_Class().CreateShortcut(path) as IWshShortcut;
 
+            shortcut.TargetPath = targetPath;
             shortcut.Arguments = arguments;
             shortcut.Save();
         }

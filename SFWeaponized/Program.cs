@@ -14,13 +14,13 @@ namespace SFWeaponized
 
             foreach (var app in SquirrelAppManager.AppList)
             {
+                Console.WriteLine(app.Name);
                 app.CreateShortcut();
-                app.SetShortcut();
-
-                Console.WriteLine(app.ShortcutPath);
+                app.SetShortcutPath();
+                app.PatchShortcut();
             }
 
-            Console.Read();
+            Console.ReadLine();
         }
     }
 }
